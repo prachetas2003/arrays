@@ -1,0 +1,60 @@
+#include <iostream>
+
+void findIntersection(int arr1[], int arr2[], int N) {
+    // Sort the arrays
+    for (int i = 0; i < N - 1; ++i) {
+        for (int j = 0; j < N - i - 1; ++j) {
+            if (arr1[j] > arr1[j + 1]) {
+                int temp = arr1[j];
+                arr1[j] = arr1[j + 1];
+                arr1[j + 1] = temp;
+            }
+            if (arr2[j] > arr2[j + 1]) {
+                int temp = arr2[j];
+                arr2[j] = arr2[j + 1];
+                arr2[j + 1] = temp;
+            }
+        }
+    }
+
+    // Find the intersection of the sorted arrays
+    std::cout << "[";
+    int i = 0, j = 0;
+    bool first = true;
+    while (i < N && j < N) {
+        if (arr1[i] == arr2[j]) {
+            if (!first) {
+                std::cout << ", ";
+            }
+            std::cout << arr1[i];
+            first = false;
+            i++;
+            j++;
+        } else if (arr1[i] < arr2[j]) {
+            i++;
+        } else {
+            j++;
+        }
+    }
+    std::cout << "]" << std::endl;
+}
+
+int main() {
+    int N;
+    std::cin >> N;
+
+    int arr1[N];
+    for (int i = 0; i < N; ++i) {
+        std::cin >> arr1[i];
+    }
+
+    int arr2[N];
+    for (int i = 0; i < N; ++i) {
+        std::cin >> arr2[i];
+    }
+
+    // Find the intersection of the two arrays and print the result
+    findIntersection(arr1, arr2, N);
+
+    return 0;
+}

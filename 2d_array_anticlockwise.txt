@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+
+void printAntiClockwiseSpiral(int arr[][10], int M, int N) {
+    int left = 0, right = N - 1, top = 0, bottom = M - 1;
+
+    while (left <= right && top <= bottom) {
+        // Print the first column
+        for (int i = top; i <= bottom; i++) {
+            cout << arr[i][left] << ", ";
+        }
+        left++;
+
+        // Print the last row
+        for (int i = left; i <= right; i++) {
+            cout << arr[bottom][i] << ", ";
+        }
+        bottom--;
+
+        // Print the last column
+        if (left <= right) {
+            for (int i = bottom; i >= top; i--) {
+                cout << arr[i][right] << ", ";
+            }
+            right--;
+        }
+
+        // Print the first row
+        if (top <= bottom) {
+            for (int i = right; i >= left; i--) {
+                cout << arr[top][i] << ", ";
+            }
+            top++;
+        }
+    }
+}
+
+int main() {
+    int M, N;
+    cin >> M >> N;
+
+    int arr[10][10];
+
+    for (int i = 0; i < M; i++) {
+        for (int j = 0; j < N; j++) {
+            cin >> arr[i][j];
+        }
+    }
+
+    printAntiClockwiseSpiral(arr, M, N);
+    cout << "END" << endl;
+
+    return 0;
+}

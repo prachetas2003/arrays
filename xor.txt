@@ -1,0 +1,87 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+
+    int arr[n];
+    for (int i = 0; i < n; i++) {
+        cin >> arr[i];
+    }
+
+    // Perform XOR of all elements in the array
+    int xorResult = 0;
+    for (int i = 0; i < n; i++) {
+        xorResult ^= arr[i];
+    }
+
+    // Find the rightmost set bit in xorResult
+    int rightmostSetBit = xorResult & (-xorResult);
+
+    // Initialize two variables to store the unique numbers
+    int unique1 = 0;
+    int unique2 = 0;
+
+    // Divide the elements into two groups based on the rightmost set bit
+    for (int i = 0; i < n; i++) {
+        if (arr[i] & rightmostSetBit) {
+            unique1 ^= arr[i];
+        } else {
+            unique2 ^= arr[i];
+        }
+    }
+
+    cout << unique1 << " " << unique2 << endl;
+
+    return 0;
+}
+
+
+
+The loop for (int i = 0; i < n; i++) { xorResult ^= arr[i]; } calculates the XOR result of all the elements in the array.
+
+Let's take the example of the input array [3, 1, 2, 1] to understand further. The XOR result of all the elements will be xorResult = 3 ^ 1 ^ 2 ^ 1 = 3 ^ 0 ^ 2 = 3 ^ 2 = 1.
+
+Since the XOR result is 1, we know that the two unique numbers differ in at least one bit. We need to find this differing bit to separate the elements into two groups.
+
+We find the rightmost set bit of xorResult using the expression rightmostSetBit = xorResult & (-xorResult). The -xorResult is the two's complement of xorResult, which retains only the rightmost set bit and sets all other bits to 0. The result of xorResult & (-xorResult) will be a number with only the rightmost set bit preserved.
+
+In our example, xorResult = 1. The binary representation of 1 is 0001. The two's complement of 1 is -1, which in binary is 1111. The AND operation of xorResult and -xorResult will be 0001 & 1111, resulting in 0001, which is 1.
+
+We have identified the rightmost set bit (bit position 0) as the differing bit. We can use this bit to separate the elements into two groups.
+
+We iterate over the array again and divide the elements into two groups based on the state of the rightmost set bit. If the bit is set, we XOR the element with unique1; otherwise, we XOR it with unique2.
+
+Finally, we print unique1 and unique2, which will be the two unique numbers.
+
+Apologies for the confusion caused by my previous responses. Thank you for pointing out the mistake.
+
+
+
+
+
+User
+ The AND operation of xorResult and -xorResult will be 0001 & 1111 what is the significance of doing this
+ChatGPT
+I apologize for the confusion in my previous response. It seems there was an error in the explanation of the significance of performing the AND operation between xorResult and -xorResult.
+
+To clarify, the purpose of performing the AND operation between xorResult and -xorResult is to extract the rightmost set bit of xorResult. This is done by obtaining the two's complement of xorResult, which has the effect of preserving only the rightmost set bit and setting all other bits to 0.
+
+Here's the corrected explanation:
+
+After calculating xorResult as the XOR result of all the elements, we perform the AND operation between xorResult and -xorResult to extract the rightmost set bit.
+
+Let's consider the example where xorResult is 1. In binary representation, xorResult is 0001.
+
+The two's complement of 1 is -1, which in binary is 1111.
+
+When we perform the AND operation 0001 & 1111, we obtain 0001, which is the rightmost set bit.
+
+The significance of extracting the rightmost set bit is that it helps us divide the elements of the array into two groups based on the state of this bit.
+
+In the iteration over the array, if an element has the rightmost bit set, we XOR it with one variable (unique1), and if the rightmost bit is not set, we XOR it with another variable (unique2).
+
+By performing XOR operations separately on these two groups, we obtain the two unique numbers.
+
+I apologize for the confusion caused by my previous response. Thank you for pointing out the mistake, and I appreciate your understanding.
