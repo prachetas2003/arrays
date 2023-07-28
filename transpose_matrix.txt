@@ -1,0 +1,32 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int N;
+    cin >> N;
+
+    int matrix[N][N];
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            cin >> matrix[i][j];
+        }
+    }
+
+    // Transpose the matrix
+    int transpose[N][N];
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            transpose[j][i] = matrix[i][j];
+        }
+    }
+
+    // Print the transpose matrix
+    for (int i = 0; i < N; i++) {
+        for (int j = 0; j < N; j++) {
+            cout << transpose[i][j] << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
