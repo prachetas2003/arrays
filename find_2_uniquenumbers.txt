@@ -1,0 +1,44 @@
+#include <iostream>
+using namespace std;
+
+void findUniqueNumbers(int nums[], int n) {
+    int xorResult = 0;
+    for (int i = 0; i < n; i++) {
+        xorResult ^= nums[i];
+    }
+
+    // Find the rightmost set bit in xorResult
+    int rightmostSetBit = xorResult & (-xorResult);
+
+    int uniqueNum1 = 0, uniqueNum2 = 0;
+    for (int i = 0; i < n; i++) {
+        if (nums[i] & rightmostSetBit) {
+            uniqueNum1 ^= nums[i];
+        } else {
+            uniqueNum2 ^= nums[i];
+        }
+    }
+
+    // Ensure smaller number comes before larger number
+    if (uniqueNum1 > uniqueNum2) {
+        swap(uniqueNum1, uniqueNum2);
+    }
+
+    cout << uniqueNum1 << " " << uniqueNum2 << endl;
+}
+
+int main() {
+    int n;
+
+    cin >> n;
+
+    int nums[n];
+    
+    for (int i = 0; i < n; i++) {
+        cin >> nums[i];
+    }
+
+    findUniqueNumbers(nums, n);
+
+    return 0;
+}
